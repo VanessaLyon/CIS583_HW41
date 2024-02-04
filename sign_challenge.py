@@ -13,6 +13,10 @@ if __name__ == "__main__":
     sk = "b6b07402191ac2a961ce645d303b1b5e1a6c73afdf8b953d18ff1ab1cf61cbd2"
     acct = w3.eth.account.from_key(sk)
     private_key = acct._private_key
+
+    print(sk)
+    print(acct)
+    print(private_key)
  
     #private_key = 'YOUR_PRIVATE_KEY_HERE'  # Replace with your private key
     challenge = ''.join(random.choice(string.ascii_letters) for i in range(32)) 
