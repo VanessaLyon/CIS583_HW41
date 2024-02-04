@@ -14,8 +14,8 @@ if __name__ == "__main__":
     acct = w3.eth.account.from_key(sk)
     private_key = acct._private_key
 
+    print(acct)
+    print(private_key)
+
     #private_key = 'YOUR_PRIVATE_KEY_HERE'  # Replace with your private key
     challenge = ''.join(random.choice(string.ascii_letters) for i
-
-
-
