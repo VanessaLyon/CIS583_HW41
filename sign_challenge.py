@@ -13,9 +13,19 @@ if __name__ == "__main__":
     sk = "b6b07402191ac2a961ce645d303b1b5e1a6c73afdf8b953d18ff1ab1cf61cbd2"
     acct = w3.eth.account.from_key(sk)
     private_key = acct._private_key
-
-    print(acct)
-    print(private_key)
-
+ 
     #private_key = 'YOUR_PRIVATE_KEY_HERE'  # Replace with your private key
-    challenge = ''.join(random.choice(string.ascii_letters) for i
+    challenge = ''.join(random.choice(string.ascii_letters) for i in range(32)) 
+
+    addr, sig = sign_challenge(challenge)
+
+    eth_encoded_msg = eth_account.messages.encode_defunct(text=challenge)
+
+    if eth_account.Account.recover_message(eth_encoded_msg,signature=sig) == addr:
+        print( f"Success: signed the challenge {challenge} using address {addr}!")
+    else:
+        print( f"Failure: The signature does not verify!" )
+        print( f"signature = {sig}" )
+        print( f"address = {addr}" )
+        print( f"challenge = {challenge}" )
+
