@@ -27,7 +27,11 @@ def hashPair(a, b):
 def generateMerkleProof(prime, leaves):
     # Sort the leaves and convert them to bytes
     sorted_leaves = sorted([Web3.solidity_keccak(['uint256'], [leaf]) for leaf in leaves])
+    #initialize index
     index = sorted_leaves.index(Web3.solidity_keccak(['uint256'], [prime]))
+    print ('index at beginning is ', index)
+
+    #establish proof
     proof = []
     while len(sorted_leaves) > 1:
         if index % 2 == 0:
@@ -39,6 +43,7 @@ def generateMerkleProof(prime, leaves):
             hashed = hashPair(sorted_leaves[index - 1], sorted_leaves[index])
         index = index // 2
         sorted_leaves = [hashed] + sorted_leaves[2:][::2]
+    print(proof)
     return proof
 
 def connectTo2(chain): #Can we simplify?
@@ -70,6 +75,12 @@ def submitProof(prime, w3, contract):
         'nonce': w3.eth.getTransactionCount(w3.eth.default_account),
         # Additional transaction parameters (gas, gasPrice) may be required.
     })
+
+    #My details
+    sk = "b6b07402191ac2a961ce645d303b1b5e1a6c73afdf8b953d18ff1ab1cf61cbd2"
+    acct = w3.eth.account.from_key(sk)
+    private_key = acct._private_key
+
     signed_tx = w3.eth.account.sign_transaction(tx, private_key='YOUR_PRIVATE_KEY_HERE')
     tx_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
     return Web3.toHex(tx_hash)
@@ -89,5 +100,6 @@ if __name__ == "__main__":
     #contract = w3.eth.contract(abi=abi, address=address)
 
     contract = w3.eth.contract(abi=abi, address=acct)
+    print('contract is ', contract)
     prime = 17  # Example prime number
     print(submitProof(prime, w3, contract))
