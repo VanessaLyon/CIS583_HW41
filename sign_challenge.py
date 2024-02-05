@@ -4,7 +4,7 @@ from eth_account.messages import encode_defunct
 def sign_challenge(challenge):
     #My details
     sk = "b6b07402191ac2a961ce645d303b1b5e1a6c73afdf8b953d18ff1ab1cf61cbd2"
-    account = w3.eth.account.from_key(sk)
+    account = Account.from_key(sk)
     private_key = account._private_key
 
     
