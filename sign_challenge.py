@@ -1,4 +1,5 @@
 import eth_account
+from eth_account import Account
 from eth_account.messages import encode_defunct
 
 def sign_challenge(challenge):
