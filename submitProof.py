@@ -67,6 +67,7 @@ def connectTo(chain):
     return w3
 
 def submitProof(prime, w3, contract):
+    print('I am in submitProof')
     leaves = [i for i in range(2, 8193)]  # Dummy primes for illustration
     proof = generateMerkleProof(prime, leaves)
     leaf_in_bytes = Web3.solidity_keccak(['uint256'], [prime])
@@ -95,6 +96,7 @@ if __name__ == "__main__":
     #My details
     sk = "b6b07402191ac2a961ce645d303b1b5e1a6c73afdf8b953d18ff1ab1cf61cbd2"
     acct = w3.eth.account.from_key(sk)
+    print('I print my details')
 
     #w3.eth.default_account = 'YOUR_ACCOUNT_ADDRESS_HERE'  # Set your account address here
     #contract = w3.eth.contract(abi=abi, address=address)
