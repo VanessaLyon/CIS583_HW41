@@ -1,7 +1,7 @@
 import eth_account
 from eth_account.messages import encode_defunct
 
-def sign_challenge(challenge, private_key):
+def sign_challenge(challenge):
     account = eth_account.Account.from_key(private_key)
     eth_encoded_msg = encode_defunct(text=challenge)
     signature = account.sign_message(eth_encoded_msg)
