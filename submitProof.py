@@ -89,7 +89,8 @@ def generateMerkleProof(prime, leaves):
     
     chosen_leaf = leaves[chosen_index].to_bytes(32, byteorder='big')
     
-    return proof, chosen_leaf
+    #return proof, chosen_leaf
+    return proof, prime.to_bytes(32, byteorder='big')
 
 def connectToChain(chain):
     if chain == 'avax':
@@ -119,7 +120,7 @@ def submitProof(prime, w3, contract):
     private_key = acct._private_key
 
     #gas_estimate = contract.functions.submit(proof, chosen_leaf).estimate_gas({'from': acct.address})
-    gas_estimate = 30000 #Could not solve the bug, so I plugged as such
+    gas_estimate = 1000000 #Could not solve the bug, so I plugged as such
     gas_price = w3.eth.gas_price
     print(f"Gas estimate: {gas_estimate}, Gas price: {gas_price} Wei")
 
